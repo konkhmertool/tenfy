@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="stylesheet" href="style/bootstrap.min.3.3.7.css">
+  <link rel="stylesheet" href="style/style.css">
+    <script src="js/jquery.min.3.2.1.js"></script>
+    <script src="js/global_function.js"></script>
+  </head>
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+	var globalData = [
+		{"domainname": "https://wichawanni.blogspot.com/?q=อ่านข่าวที่นี่&amp;thumbnail=last","googlecode": "0","fbstylename": "0","fbpagename": "0","fbbanner": "0","bloggerid": "5631024121999016645","amungus": ""},
+	    {
+	        "domainname": "https://sotyotnews24.com/?q=อ่านข่าวที่นี่&amp;thumbnail=last","googlecode": "NO","fbstylename": "NO","fbpagename": "NO","fbbanner": "NO","bloggerid": "1033704408534181065","amungus": ""
+	    }
+	];
+});
+</script>
+
+<body>
+<div class="wrap_content">
+
+<div>
+	<label class="radio-inline"><input type="radio" name="optradiobloggerid" id="5631024121999016645" value="5631024121999016645" data-url="https://wichawanni.blogspot.com/?q=อ่านข่าวที่นี่&amp;thumbnail=last" required="">wichawanni.blogspot.com&ZeroWidthSpace;</label>
+	
+	<label class="radio-inline"><input type="radio" name="optradiobloggerid" id="1033704408534181065" value="1033704408534181065" data-url="https://sotyotnews24.com/?q=อ่านข่าวที่นี่&amp;thumbnail=last" required="">sotyotnews24&ZeroWidthSpace;.com&ZeroWidthSpace;</label>
+</div>
+
+<!-- pull down to retreive new content from website -->
+	<div class="dv_mobilepulldownrefresh">កំពុងទាញយក... <br/><img src="img/refresh_loading3.gif" id="img_mobilepulldownrefresh" width="30"></div>
+    
+    <!-- aread display user google post -->
+    <div class='dv_wrapmessage'>
+        <div id="blogContainerPostContent" class="dv_displaymsg"></div>
+    </div>
+<div class="clear"></div>
+<script src="js/js.js"></script>
+</div>
+</body>
+</html>
