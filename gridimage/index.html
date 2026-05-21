@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+        <title>Making Grid Images</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script src="js/jquery.min.3.2.1.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.js"></script>
+		<script src="js/bootstrap.4.5.2.min.js" type="text/javascript"></script>
+		<script src="js/html2canvas.min.js" type="text/javascript"></script>
+		<script src="js/my-js.js" type="text/javascript"></script>
+		<script src="js/my-js-dropdown.js" type="text/javascript"></script>
+		<link href="css/bootstrap.4.5.2.min.css" rel="stylesheet">
+		<link href="css/jquery-ui.css" rel="stylesheet">
+		<!-- Latest compiled and minified JavaScript -->
+        <link href="css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+    	<div class="wrap_contain" id="wrap_contain">
+    		<div class="dv_grid">
+
+            <div class="dv_wrap_txt_img">
+            		<input type="text" class="img_crawler" id="img_1" data-img-bl-id="img_block1" value="" placeholder="image url address" onfocus="this.select();" onmouseup="focusMeOnPc(this)">
+            		<input type="text" class="img_crawler" id="img_2" data-img-bl-id="img_block2" value="" placeholder="image url address" onfocus="this.select();" onmouseup="focusMeOnPc(this)">
+            		<input type="text" class="img_crawler" id="img_3" data-img-bl-id="img_block3" value="" placeholder="image url address" onfocus="this.select();" onmouseup="focusMeOnPc(this)">
+            		<input type="text" class="img_crawler" id="img_4" data-img-bl-id="img_block4" value="" placeholder="image url address" onfocus="this.select();" onmouseup="focusMeOnPc(this)">
+            		<input type="text" class="img_crawler" id="img_5" data-img-bl-id="img_block5" value="" placeholder="image url address" onfocus="this.select();" onmouseup="focusMeOnPc(this)">
+            </div>
+            <div class="dv_option_ctrl">
+            		<input type='file' id='custom_img_file' class="uploadFile" data-img-bl-id="img_block1"/>
+            		<input type='file' id='custom_img_file2' class="uploadFile" data-img-bl-id="img_block2"/>
+            		<input type='file' id='custom_img_file3' class="uploadFile" data-img-bl-id="img_block3"/>
+            		<input type='file' id='custom_img_file4' class="uploadFile" data-img-bl-id="img_block4"/>
+            		<input type='file' id='custom_img_file5' class="uploadFile" data-img-bl-id="img_block5"/>
+            		
+            		<input type="button" value="Upload 1st" data-upload-id="custom_img_file" class="uploadButton" id="uploadButton" />
+            		<input type="button" value="Upload 2nd" data-upload-id="custom_img_file2" class="uploadButton" id="uploadButton2" />
+            		<input type="button" value="Upload 3rd" data-upload-id="custom_img_file3" class="uploadButton" id="uploadButton3" />
+            		<input type="button" value="Upload 4th" data-upload-id="custom_img_file4" class="uploadButton" id="uploadButton4" />
+            		<input type="button" value="Upload 5th" data-upload-id="custom_img_file5" class="uploadButton" id="uploadButton5" />
+            		<div style="margin-top:10px">
+            		<input type="text" id="txt_slogan" name="txt_slogan" placeholder="Slogan" style="width:150px" value="@ข่าวดังเฟซบุ๊ก">
+            		<input type="number" id="txt_img_num" style="width: 80px;text-align:center" min="1" max="99" step="1" value="1">
+                <label for="txt_img_num">Amount of images</label>
+                </div>
+            	</div>
+            	<div class="clear"></div>
+		</div>
+		
+		<div class="dv_grid2" style="position:relative">
+			<ul id="tabs">
+				<li><a id="tab1">Style1</a></li>
+				<li><a id="tab2">Style2</a></li>
+				<li><a id="tab3">Style3</a></li>
+				<li><a id="tab4">Style4</a></li>
+				<li><a id="tab5">Style5</a></li>
+				<li><a id="tab6">Style6</a></li>
+			</ul>
+			<div class="container" id="tab1C">
+				<div style="">
+					<input type="button" value="Download" class="btn_download_square" data-thumnail="wrap_thumbnail3"/>
+					<div id="wrap_thumbnail3"  class="div_wrap_preview wrap_thumbnail3">
+						<div class="dv_t2_grid dv_t2_top">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block1" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_slogan"><span class='sp_slogan'>testing slogan</span></div>
+						</div>
+						<div class="dv_t2_grid dv_t2_bottom">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block2" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block3" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block4" data-img-width="" data-img-height=""><span></span></div></div>
+							
+							<div class="dv_cover_bg"></div>
+							<div class="dv_cover_number" style=""><span class="sp_img_number" id="sp_img_number"></span></div>
+						</div>
+					</div><!-- .wrap_thumbnail3 -->
+				</div>
+			</div>
+			
+			<div class="container" id="tab2C">
+				<div style="">
+					<input type="button" value="Download" class="btn_download_square" data-thumnail="wrap_thumbnail11"/>
+					<div id="wrap_thumbnail11"  class="div_wrap_preview wrap_thumbnail11">
+						<div class="dv_t2_grid dv_t2_top">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block1" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_slogan"><span class='sp_slogan'>testing slogan</span></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block2" data-img-width="" data-img-height=""><span></span></div></div>
+						</div>
+						<div class="dv_t2_grid dv_t2_bottom">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block3" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block4" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block5" data-img-width="" data-img-height=""><span></span></div></div>
+							
+							<div class="dv_cover_bg"></div>
+							<div class="dv_cover_number" style=""><span class="sp_img_number" id="sp_img_number"></span></div>
+						</div>
+					</div><!-- .wrap_thumbnail11 -->
+				</div>
+			</div>
+			
+			<div class="container" id="tab3C">
+				<div style="">
+					<input type="button" value="Download" class="btn_download_square" data-thumnail="wrap_thumbnail5"/>
+					<div id="wrap_thumbnail5"  class="div_wrap_preview wrap_thumbnail5">
+						<div class="dv_t2_grid dv_t2_top">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block1" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_slogan"><span class='sp_slogan'>testing slogan</span></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block2" data-img-width="" data-img-height=""><span></span></div></div>
+						</div>
+						<div class="dv_t2_grid dv_t2_bottom">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block3" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block4" data-img-width="" data-img-height=""><span></span></div></div>
+							<!-- <div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block5" data-img-width="" data-img-height=""><span></span></div></div> -->
+							<div class="dv_cover_bg"></div>
+							<div class="dv_cover_number" style=""><span class="sp_img_number" id="sp_img_number"></span></div>
+						</div>
+					</div><!-- .wrap_thumbnail6 -->
+				</div>
+			</div>
+			
+			<div class="container" id="tab4C">
+				<div style="">
+				<input type="button" value="Download" class="btn_download_square" data-thumnail="wrap_thumbnail4"/>
+			 		<div id="wrap_thumbnail4"  class="div_wrap_preview wrap_thumbnail4">
+			 			<div class="dv_t2_grid dv_t2_top">
+			 				<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block1" data-img-width="" data-img-height=""><span></span></div></div>
+			 				<div class="dv_slogan"><span class='sp_slogan'>testing slogan</span></div>
+			 			</div>
+			 			<div class="dv_t2_grid dv_t2_bottom">
+			 				<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block2" data-img-width="" data-img-height=""><span></span></div></div>
+			 				<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block3" data-img-width="" data-img-height=""><span></span></div></div>
+			 				<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block4" data-img-width="" data-img-height=""><span></span></div></div>
+			 				<div class="dv_cover_bg"></div>
+			 				<div class="dv_cover_number" style=""><span class="sp_img_number" id="sp_img_number"></span></div>
+						</div>
+					</div><!-- .wrap_thumbnail4 -->
+				</div>
+			</div>
+			
+			<div class="container" id="tab5C">
+				<div style="">
+					<input type="button" value="Download" class="btn_download_square" data-thumnail="wrap_thumbnail8"/>
+					<div id="wrap_thumbnail8"  class="div_wrap_preview wrap_thumbnail8">
+						<div class="dv_t2_grid dv_t2_top">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block1" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_slogan"><span class='sp_slogan'>testing slogan</span></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block2" data-img-width="" data-img-height=""><span></span></div></div>
+						</div>
+						<div class="dv_t2_grid dv_t2_bottom">
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block3" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block4" data-img-width="" data-img-height=""><span></span></div></div>
+							<div class="dv_cover_bg"></div>
+							<div class="dv_cover_number" style=""><span class="sp_img_number" id="sp_img_number"></span></div>
+						</div>
+					</div><!-- .wrap_thumbnail8 -->
+				</div>
+			</div>
+			
+			<div class="container" id="tab6C">
+				<div style="">
+					<input type="button" value="Download" class="btn_download_square" data-thumnail="wrap_thumbnail10"/>
+					<div id="wrap_thumbnail10"  class="div_wrap_preview wrap_thumbnail10">
+				 			<div class="dv_t2_grid dv_t2_top">
+				 				<div class="dv_t2_ch"><div class="dv_display_img bg_position_center" data-img-bl-id="img_block1" data-img-width="" data-img-height=""><span></span></div></div>
+				 				<div class="dv_slogan"><span class='sp_slogan'>testing slogan</span></div>
+				 			</div>
+					</div><!-- .wrap_thumbnail9 -->
+				    </div>
+			</div>
+			        		
+		</div>
+    </div> <!-- End wrap_contain -->
+    <div class="clear"></div>
+    
+    <div class="dvwrap_menu">
+    	<div class="dropdown">
+		  <div class="dropdown-content">
+		    <ul>
+		    <li><span data-value="100% 100%">Fill background</span></li>
+		    <li><div class="dvOptionImgWH">W: <input type="number" id="txt_imgwidth" style="width: 80px;text-align:center" min="1" max="9999" step="1" value="100"> - H: <input type="number" id="txt_imgheight" style="width: 80px;text-align:center" min="1" max="9999" step="1" value="100"></div></li>
+		    <li><span data-value="cover">Reset background</span></li>
+		    </ul>
+		  </div>
+		</div>
+    </div>
+    <script type="text/javascript">
+    </script>
+    </body>
+</html>
