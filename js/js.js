@@ -24,12 +24,70 @@ var jqXHR;
     $("#blogContainerPostContent").on("click", "input.btnShortLink", function () {
 		var tmpTxtArea = $(this).closest('li').find('.tareapstctn');
 		copyNewsBlogWp($(this),$(tmpTxtArea),false,false,false,true);
-    });    
+    });
+
+    $("#blogContainerPostContent").on("click", "input.btnRndLink", function () {
+        // looking for one more top li or closet after UL
+		var tmpTxtArea = $(this).closest("ul").children("li:first").find(".tareapstctn");
+        copyNewsBlogWp($(this),$(tmpTxtArea),true,false,false,false);
+    });
+
     $("#blogContainerPostContent").on("click", "input.btnCopyNews", function () {
 		var tmpTxtArea = $(this).closest('li').find('.tareapstctn');
-		copyNewsBlogWp($(this),$(tmpTxtArea),true,false,false,false);
+		copyNewsBlogWp($(this),$(tmpTxtArea),false,true,false,false);
     });
-    
+    //"click touchend",
+    $("#blogContainerPostContent").on(
+    "touchend",
+    "textarea.form-control.tareapstctn.tareapstctnblogger",
+        function (e) {
+            e.preventDefault();
+            var textarea = this;
+
+            // Select all text
+            textarea.focus();
+            textarea.select();
+            textarea.setSelectionRange(0, textarea.value.length);
+
+            // Copy to clipboard
+            var copied = false;
+            try {
+                copied = document.execCommand("copy");
+            } catch (err) {
+                copied = false;
+            }
+
+            if (copied) {
+                showCopiedToast(textarea);
+            }            
+        }
+    );
+
+    function showCopiedToast(textarea){
+        // Optional highlight
+        $(".tareapstctn").css("background-color", "#fdfdfd");
+        $(textarea).css("background-color", "#cecece");
+        
+        $(".copy-toast").remove();
+
+        var $toast = $("<div class='copy-toast'>✓ Copied</div>");
+        $("body").append($toast);
+
+        var offset = $(textarea).offset();
+
+        $toast.css({
+            left: offset.left + ($(textarea).outerWidth() / 2),
+            top: offset.top + ($(textarea).outerHeight() / 2)
+        });
+
+        $toast.hide()
+            .fadeIn(200)
+            .delay(1000)
+            .fadeOut(500, function(){
+                $(this).remove();
+            });
+    }
+
     function getBloggerPost(tmpBloggerId) {
         // before update content must clear the old content first
         var objurl = 'https://www.blogger.com/feeds/' + tmpBloggerId + '/posts/default?max-results=40&alt=json-in-script';
@@ -98,9 +156,9 @@ var jqXHR;
                     tmpTitle = tmpTitle.trim(); // remove white space first and last
                     // 
                     var tmpLabel = "";
-                    if(data.feed.entry[i].category[0].term){
-                    		tmpLabel = "#" + data.feed.entry[i].category[0].term;
-                    }
+                    const category = data.feed.entry[i].category?.[0]?.term || "";
+                    tmpLabel = category ? "#" + category : "";                    
+
                     var arr = ['#ข่าวสังคม','#ข่าวดารา','#ข่าวบันเทิง','#คลิป'];
                     	// Remove html tag get text only
                 		var tmp_tags = "";
@@ -124,7 +182,7 @@ var jqXHR;
 
                 		var tmpPostUrl = postUrl;
                 		
-                		var arr_Readmore = ['อ่านข่าว','อ่านข่าวที่นี่','อ่านเพิ่มเติม'];
+                		var arr_Readmore = ['ดูเพิ่มเติม:','','อ่านข่าวที่นี่👉','อ่านเพิ่มเติม:','ดูเพิ่มเติม👉','','อ่านข่าวที่นี่:','อ่านเพิ่มเติม👉'];
                 		var arr_readmore_icon = ['ความคิดเห็น👇','ความคิดเห็น👇👇'];
                 		
 					if(q_parameter !=="" && q_parameter !== null){
@@ -140,7 +198,7 @@ var jqXHR;
                     if(q_linebreaklink==1){
                     		tmpPostUrl = tmpPostUrl + "\n\n";
                     }
-                    var tmpTextArea = tmpPostUrl + "\n" + tmpTitle;
+                    var tmpTextArea = tmpTitle + "\n" + tmpPostUrl ;
                     if(q_comment){
                     		tmpTextArea = tmpTextArea + "\n" + q_readmore;
 					}
@@ -171,7 +229,7 @@ var jqXHR;
                             + "<span class='post_number post_number2'>"+ post_number +"</span>"
                             + "<textarea id='txtLinkTitle"+i+"' rows='5' cols='100%' readonly class='form-control tareapstctn tareapstctnblogger' onmouseup='mouseUpOnPc(this)'>" + tmpTextArea + "</textarea>" //onfocus='focusMe(this)'
                             + "<div class='dvpstctnSendBoomNews'>"
-                            + "<input type='button' data-blogid='"+tmpBloggerId+"' data-url='" + postUrl + "' data-title='" + tmpTitle + "' data-img='" + imgSrc + "' data-desc='" + tmpDesc + "' data-tags='" + str_tags + "' data-content='"+tmpTextContent+"' class='btn btnleft btn-primary btnCopyNews' value='COPY Ctn'>"
+                            + "<input type='button' data-blogid='"+tmpBloggerId+"' data-url='" + postUrl + "' data-title='" + tmpTitle + "' data-img='" + imgSrc + "' data-desc='" + tmpDesc + "' data-tags='" + str_tags + "' data-content='"+tmpTextContent+"' class='btn btnleft btn-primary btnCopyNews' value='Copy Ctn'>"
                             + "<input type='button' data-blogid='"+tmpBloggerId+"' data-url='" + tmpPostUrl + "' data-title='" + tmpTitle + "' data-img='" + imgSrc + "' data-qparam='"+q_parameter+"' class='btn btnmiddle btn-primary btnShortLink' value='COPY Title'>"
                             + "<input type='button' data-toggle='modal' data-value='200' data-blogid='"+tmpBloggerId+"' data-url='" + postUrl + "' data-title='" + tmpTitle + "' data-img='" + imgSrc + "' class='btn btnright btn-warning openModalPostContentSendBoomNews' value='Boom'></div>"
                             + "</li>"
@@ -179,7 +237,10 @@ var jqXHR;
                             + "<p><img width='50px' src='" + smallImgSrc + "' /></p>"
                             + "<p class='plikeshare'><iframe src='https://www.facebook.com/plugins/share_button.php?href=" + postUrl + "&width=118&layout=button_count&locale=en_US&size=small&mobile_iframe=true&height=46&appId' width='118' height='21' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true' allow='encrypted-media'></iframe></p>"
                             //+ "<div class='plikeshare'><div class='fb-share-button' data-href='" + postUrl + "' data-layout='button_count' data-size='small'><a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" + postUrl + "&amp;src=sdkpreparse' class='fb-xfbml-parse-ignore'>Share</a></div></div>"
+                            + "<div class='dvpstctnSendBoomNews'>"
                             + "<p class='pviewlink'><a href='" + postUrl + "' target='_blank' class='viewlinkbgg pviewbitly'>View</a></p>"
+                            + "<input type='button' data-blogid='"+tmpBloggerId+"' data-url='" + tmpPostUrl + "' data-title='" + tmpTitle + "' data-img='" + imgSrc + "' data-qparam='"+q_parameter+"' class='btn btnmiddle btn-primary btnRndLink' value='COPY Random Link' style='width:auto;border-radius:unset;margin-top:-2px;padding:0 5px'>"                            
+                            +"</div>"
                             + "</li>"
                             + '<br clear="all">'
                             + "</ul></div>"
@@ -203,7 +264,7 @@ var jqXHR;
 	    	}); // End done ajax function
     } // End function getBloggerPost
     
-    function copyNewsBlogWp(objThis,objThisTxt=false,objIsButtonCopyClick = false,objIsBtnCopyContent = false, objIsTouch = false,objIsBtnCopyLink =false){
+    function copyNewsBlogWp(objThis,objThisTxt=false,objIsButtonCopyRndLink = false,objIsBtnCopyContent = false, objIsTouch = false,objIsBtnCopyLink =false){
 			// Chunk the title with zero space when button copy is clicked; calling function from [global_function.js]
 	    var tmpTitle = objThis.attr('data-title');
 	    tmpTitle = tmpTitle.replace(/\u200B/g,'');
@@ -212,8 +273,10 @@ var jqXHR;
 	    var objThisTxtId = objThisTxt.attr('id');
 	    var tmpOriginalValue = objThisTxt.val();
 	
-	    if(objIsButtonCopyClick){
-	        // Set new value of content with zerospace to text area	    		
+	    if(objIsButtonCopyRndLink){            
+	        // Set new value of content with zerospace to text area
+            let tmpUrl = "?bid=" + randomString(14);
+            objThisTxt.val(tmpOriginalValue+tmpUrl);            
 	    }
 	    // Condition when button copy description tag is click
 	    // Store all value of textarea
@@ -236,20 +299,34 @@ var jqXHR;
 	    // Change value of button copy and after 1 second revert it back
 	    objThis.prop('value', 'Copied');
 		// reset the previous textarea background to default 
-	    $('.tareapstctn').css("background-color", "#fdfdfd");
+	    $('.tareapstctn').css("background", "#fdfdfd");
 	    // set background when object is not null
 	    if(objThisTxt) objThisTxt.css("background-color", "#cecece");
 	
 	    
 			objThis.addClass("btnCopiedURLTitle").delay(1000).queue(function(){
 	        objThis.removeClass("btnCopiedURLTitle").dequeue();
-	        objThis.prop('value', 'COPY Ctn');
+	        objThis.prop('value', 'Copy Ctn');
 	        if(objIsBtnCopyLink){objThis.prop('value', 'COPY Title');}
+            if(objIsButtonCopyRndLink){objThis.prop('value', 'COPY Random Link');}
 	     	// clear background after 1 second
-	        //if(objThisTxt) objThisTxt.css("background-color", "#fdfdfd");
+	        setTimeout(function() {
+			    $('.tareapstctn').css('background', '#fdfdfd');
+			}, 1000);
 	        //Remove focus from textarea | and selected
 	        copyText.blur();
 	        // Restore the original value to textarea back
 	        objThisTxt.val(tmpOriginalValue);
 	    });     
 	} //copyNewsBlogWp
+
+    function randomString(length) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let result = "";
+
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        return result;
+    }
