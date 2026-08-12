@@ -182,14 +182,14 @@ var jqXHR;
 
                 		var tmpPostUrl = postUrl;
                 		
-                		var arr_Readmore = ['ดูเพิ่มเติม:','','อ่านข่าวที่นี่:','อ่านเพิ่มเติม:','ดูเพิ่มเติม:','','อ่านข่าวที่นี่:','อ่านเพิ่มเติม:'];
+                		var arr_Readmore = ['ดูเพิ่มเติม: ','','อ่านข่าวที่นี่: ','อ่านเพิ่มเติม: ','ดูเพิ่มเติม: ','','อ่านข่าวที่นี่: ','อ่านเพิ่มเติม: '];
                 		var arr_readmore_icon = ['ความคิดเห็น👇','ความคิดเห็น👇👇'];
                 		
 					if(q_parameter !=="" && q_parameter !== null){
 						var strRandom = Math.floor(Math.random()*arr_Readmore.length);
 						q_parameter = arr_Readmore[strRandom];
 						q_readmore = q_parameter + " " + arr_readmore_icon[Math.floor(Math.random()*arr_readmore_icon.length)];
-						tmpPostUrl = q_parameter + " " + tmpPostUrl;
+						tmpPostUrl = q_parameter + tmpPostUrl;
 					}
 					
 					if(q_sfb){
@@ -275,7 +275,7 @@ var jqXHR;
 	
 	    if(objIsButtonCopyRndLink){            
 	        // Set new value of content with zerospace to text area
-            let tmpUrl = "?bid=" + randomString(14);
+            let tmpUrl = randomString(15);
             objThisTxt.val(tmpOriginalValue+tmpUrl);            
 	    }
 	    // Condition when button copy description tag is click
@@ -320,13 +320,34 @@ var jqXHR;
 	    });     
 	} //copyNewsBlogWp
 
-    function randomString(length) {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        let result = "";
+	/*
+	store the previous generated values with timestamps and reject any new random string that was already generated within the last 5 minutes.
+	*/
+    const randomHistory = new Map();
 
-        for (let i = 0; i < length; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        return result;
-    }
+	function randomString(length) {
+	    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	    const now = Date.now();
+	    const fiveMinutes = 5 * 60 * 1000;	
+	    // Remove expired values older than 5 minutes
+	    for (const [value, timestamp] of randomHistory) {
+	        if (now - timestamp > fiveMinutes) {
+	            randomHistory.delete(value);
+	        }
+	    }
+	
+	    let result = "";	
+	    do {
+	        result = "";	
+	        for (let i = 0; i < length; i++) {
+	            result += chars.charAt(Math.floor(Math.random() * chars.length));
+	        }	
+	    } while (randomHistory.has(result)); // generate again if duplicate	
+	    // Save generated value with timestamp
+	    randomHistory.set(result, now);	
+		
+		var tmp_pramId = ['?bid=','?kid=','?nid=','?tid=','?sid='];
+		var strRandom = Math.floor(Math.random()*tmp_pramId.length);		
+		result = tmp_pramId[strRandom] + result;
+	    return result;
+	}
