@@ -280,7 +280,9 @@ var jqXHR;
             let tmpUrl2 = randomString(15);
 			let tmpCreateMoreTenLinks = "";
 			if (tmpmkmoretenrandomlink){
-				for (let i = 0; i < 10; i++) {
+				//Convert this value to an integer using base 10, which is the normal decimal number system."
+				let tmpCount = parseInt(tmpmkmoretenrandomlink, 10) || 0;
+				for (let i = 0; i < tmpCount; i++) {
 					let tmpUrl3 = randomString(15);
 				    tmpCreateMoreTenLinks += "\n\n" + tmpUrl + tmpUrl3;
 				}
