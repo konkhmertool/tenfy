@@ -141,14 +141,15 @@ var jqXHR;
                     
                     //global variable HTTP or HTTPS
                     postUrl = extractDomainForHTTPsNoWWW(jqHTTP_or_HTTPS,postUrl);
-                    var q_parameter="" , q_linebreaklink="",q_thumbnail="",q_sfb = "",q_comment="", q_readmore="", q_randomlink= 0;
+                    var q_parameter="" , q_linebreaklink="",q_thumbnail="",q_sfb = "",q_comment="", q_readmore="", q_randomlink= 0, q_mkmoretenrandomlink = 0;
                     
                     if(jqHTTP_or_HTTPS.includes('?')) { 
                     		q_parameter = (new URL(jqHTTP_or_HTTPS)).searchParams.get('q')?(new URL(jqHTTP_or_HTTPS)).searchParams.get('q') : null;
                     		q_linebreaklink= (new URL(jqHTTP_or_HTTPS)).searchParams.get('linebreaklink');
                     		q_thumbnail= (new URL(jqHTTP_or_HTTPS)).searchParams.get('thumbnail');
                     		q_sfb= (new URL(jqHTTP_or_HTTPS)).searchParams.get('sfb');
-                    		q_comment= (new URL(jqHTTP_or_HTTPS)).searchParams.get('comment');							
+                    		q_comment= (new URL(jqHTTP_or_HTTPS)).searchParams.get('comment');	
+							q_mkmoretenrandomlink = (new URL(jqHTTP_or_HTTPS)).searchParams.get('mkmoretenrandomlink');	
                     }
                     
                     var tmpTitle = data.feed.entry[i].title.$t;
@@ -239,7 +240,7 @@ var jqXHR;
                             //+ "<div class='plikeshare'><div class='fb-share-button' data-href='" + postUrl + "' data-layout='button_count' data-size='small'><a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" + postUrl + "&amp;src=sdkpreparse' class='fb-xfbml-parse-ignore'>Share</a></div></div>"
                             + "<div class='dvpstctnSendBoomNews'>"
                             + "<p class='pviewlink'><a href='" + postUrl + "' target='_blank' class='viewlinkbgg pviewbitly'>View</a></p>"
-                            + "<input type='button' data-blogid='"+tmpBloggerId+"' data-url='" + tmpPostUrl + "' data-title='" + tmpTitle + "' data-img='" + imgSrc + "' data-qparam='"+q_parameter+"' class='btn btnmiddle btn-primary btnRndLink' value='COPY Random Link' style='width:auto;border-radius:unset;margin-top:-2px;padding:0 5px'>"                            
+                            + "<input type='button' data-blogid='"+tmpBloggerId+"' data-url='" + tmpPostUrl + "' data-mkmoretenrandomlink ='" + q_mkmoretenrandomlink + "' data-title='" + tmpTitle + "' data-img='" + imgSrc + "' data-qparam='"+q_parameter+"' class='btn btnmiddle btn-primary btnRndLink' value='COPY Random Link' style='width:auto;border-radius:unset;margin-top:-2px;padding:0 5px'>"                            
                             +"</div>"
                             + "</li>"
                             + '<br clear="all">'
@@ -272,14 +273,17 @@ var jqXHR;
 	    var linkAndTitle = tmpUrl+"\n"+tmpTitle;
 	    var objThisTxtId = objThisTxt.attr('id');
 	    var tmpOriginalValue = objThisTxt.val();
+		var tmpmkmoretenrandomlink = objThis.attr('data-mkmoretenrandomlink');
 	
 	    if(objIsButtonCopyRndLink){            
 	        // Set new value of content with zerospace to text area
             let tmpUrl2 = randomString(15);
 			let tmpCreateMoreTenLinks = "";
-			for (let i = 0; i < 10; i++) {
-				let tmpUrl3 = randomString(15);
-			    tmpCreateMoreTenLinks += "\n\n" + tmpUrl + tmpUrl3;
+			if (tmpmkmoretenrandomlink){
+				for (let i = 0; i < 10; i++) {
+					let tmpUrl3 = randomString(15);
+				    tmpCreateMoreTenLinks += "\n\n" + tmpUrl + tmpUrl3;
+				}
 			}
             objThisTxt.val(tmpOriginalValue + tmpUrl2 + tmpCreateMoreTenLinks);            
 	    }
