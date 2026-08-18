@@ -148,8 +148,7 @@ var jqXHR;
                     		q_linebreaklink= (new URL(jqHTTP_or_HTTPS)).searchParams.get('linebreaklink');
                     		q_thumbnail= (new URL(jqHTTP_or_HTTPS)).searchParams.get('thumbnail');
                     		q_sfb= (new URL(jqHTTP_or_HTTPS)).searchParams.get('sfb');
-                    		q_comment= (new URL(jqHTTP_or_HTTPS)).searchParams.get('comment');
-							q_randomlink= (new URL(jqHTTP_or_HTTPS)).searchParams.get('randomlink');
+                    		q_comment= (new URL(jqHTTP_or_HTTPS)).searchParams.get('comment');							
                     }
                     
                     var tmpTitle = data.feed.entry[i].title.$t;
