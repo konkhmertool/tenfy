@@ -276,8 +276,13 @@ var jqXHR;
 	
 	    if(objIsButtonCopyRndLink){            
 	        // Set new value of content with zerospace to text area
-            let tmpUrl = randomString(15);
-            objThisTxt.val(tmpOriginalValue+tmpUrl);            
+            let tmpUrl2 = randomString(15);
+			let tmpCreateMoreTenLinks = "";
+			for (let i = 0; i < 10; i++) {
+				let tmpUrl3 = randomString(15);
+			    tmpCreateMoreTenLinks += "\n" + tmpUrl + tmpUrl3;
+			}
+            objThisTxt.val(tmpOriginalValue + tmpUrl2 + tmpCreateMoreTenLinks);            
 	    }
 	    // Condition when button copy description tag is click
 	    // Store all value of textarea
