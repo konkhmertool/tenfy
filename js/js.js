@@ -141,7 +141,7 @@ var jqXHR;
                     
                     //global variable HTTP or HTTPS
                     postUrl = extractDomainForHTTPsNoWWW(jqHTTP_or_HTTPS,postUrl);
-                    var q_parameter="" , q_linebreaklink="",q_thumbnail="",q_sfb = "",q_comment="", q_readmore="";
+                    var q_parameter="" , q_linebreaklink="",q_thumbnail="",q_sfb = "",q_comment="", q_readmore="", q_randomlink= 0;
                     
                     if(jqHTTP_or_HTTPS.includes('?')) { 
                     		q_parameter = (new URL(jqHTTP_or_HTTPS)).searchParams.get('q')?(new URL(jqHTTP_or_HTTPS)).searchParams.get('q') : null;
@@ -149,6 +149,7 @@ var jqXHR;
                     		q_thumbnail= (new URL(jqHTTP_or_HTTPS)).searchParams.get('thumbnail');
                     		q_sfb= (new URL(jqHTTP_or_HTTPS)).searchParams.get('sfb');
                     		q_comment= (new URL(jqHTTP_or_HTTPS)).searchParams.get('comment');
+							q_randomlink= (new URL(jqHTTP_or_HTTPS)).searchParams.get('randomlink');
                     }
                     
                     var tmpTitle = data.feed.entry[i].title.$t;
