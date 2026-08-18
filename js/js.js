@@ -279,7 +279,7 @@ var jqXHR;
 			let tmpCreateMoreTenLinks = "";
 			for (let i = 0; i < 10; i++) {
 				let tmpUrl3 = randomString(15);
-			    tmpCreateMoreTenLinks += "\n" + tmpUrl + tmpUrl3;
+			    tmpCreateMoreTenLinks += "\n\n" + tmpUrl + tmpUrl3;
 			}
             objThisTxt.val(tmpOriginalValue + tmpUrl2 + tmpCreateMoreTenLinks);            
 	    }
