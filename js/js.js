@@ -236,7 +236,7 @@ var jqXHR;
                             + "</li>"
                             + "<li>"
                             + "<p><img width='50px' src='" + smallImgSrc + "' /></p>"
-                            + "<p class='plikeshare'><iframe src='https://www.facebook.com/plugins/share_button.php?href=" + postUrl + "&width=118&layout=button_count&locale=en_US&size=small&mobile_iframe=true&height=46&appId' width='118' height='21' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true' allow='encrypted-media'></iframe></p>"
+                            //+ "<p class='plikeshare'><iframe src='https://www.facebook.com/plugins/share_button.php?href=" + postUrl + "&width=118&layout=button_count&locale=en_US&size=small&mobile_iframe=true&height=46&appId' width='118' height='21' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true' allow='encrypted-media'></iframe></p>"
                             //+ "<div class='plikeshare'><div class='fb-share-button' data-href='" + postUrl + "' data-layout='button_count' data-size='small'><a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" + postUrl + "&amp;src=sdkpreparse' class='fb-xfbml-parse-ignore'>Share</a></div></div>"
                             + "<div class='dvpstctnSendBoomNews'>"
                             + "<p class='pviewlink'><a href='" + postUrl + "' target='_blank' class='viewlinkbgg pviewbitly'>View</a></p>"
